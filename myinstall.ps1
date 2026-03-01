@@ -1,10 +1,22 @@
-# Устанавливаем список языков (Английский — первый/основной, Русский — второй)
-Set-WinUserLanguageList -LanguageList "en-US", "ru-RU" -Force
+# Устанавливаем список языков (Русский — первый/основной, Английский — второй)
+Set-WinUserLanguageList -LanguageList "ru-RU", "en-US" -Force
+
+# Устанавливаем Английский (США) как язык ввода по умолчанию (override)
+Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
+
+# Активируем "Позволить выбирать метод ввода для каждого окна приложения"
+Set-WinLanguageBarOption -UseLegacySwitchMode
 
 # Меняем сочетание клавиш на Ctrl + Shift (код "2")
 if (!(Test-Path "HKCU:\Keyboard Layout\Toggle")) { New-Item -Path "HKCU:\Keyboard Layout\Toggle" -Force }
 Set-ItemProperty -Path "HKCU:\Keyboard Layout\Toggle" -Name "Language Hotkey" -Value "2"
 Set-ItemProperty -Path "HKCU:\Keyboard Layout\Toggle" -Name "Layout Hotkey" -Value "2"
+
+# Отключаем ускорение мыши
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Value "0"
+
 
 # Применяем настройки для экрана входа и новых пользователей
 # Создаем временный файл ответов для системной утилиты
@@ -40,3 +52,5 @@ winget install -e --id Valve.Steam
 winget install -e --id Abbodi1406.vcredistRepo
 winget install -e --id Dropbox.Dropbox
 winget install -e --id Boxcryptor.Boxcryptor
+winget install -e --id Discord.Discord
+winget install -e --id MatsuriDayo.NekoRay
