@@ -34,23 +34,16 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 # Убираем строку поиска с панели задач
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Value 0
 
-# Устанавливаем winget
-powershell -c "irm https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1 | iex"
+#Сносим Onedrive
+taskkill /f /im OneDrive.exe
+winget uninstall Microsoft.OneDrive
+rd /s /q "%UserProfile%\OneDrive"
+rd /s /q "%LocalAppData%\Microsoft\OneDrive"
+rd /s /q "%ProgramData%\Microsoft OneDrive"
 
-# Устанавливаем приложения
-winget install -e --id Mozilla.Firefox.ESR
-winget install -e --id FarManager.FarManager
-winget install -e --id Notepad++.Notepad++
-winget install -e --id Git.Git
-winget install -e --id 7zip.7zip
-winget install -e --id CodecGuide.K-LiteCodecPack.Full
-winget install -e --id clsid2.mpc-hc
-winget install -e --id Apache.OpenOffice
-winget install -e --id Telegram.TelegramDesktop
-winget install -e --id Nvidia.app
-winget install -e --id Valve.Steam
-winget install -e --id Abbodi1406.vcredistRepo
-winget install -e --id Dropbox.Dropbox
-winget install -e --id Boxcryptor.Boxcryptor
-winget install -e --id Discord.Discord
-winget install -e --id MatsuriDayo.NekoRay
+#Сносим виджеты
+winget uninstall "Windows Web Experience Pack"
+
+# Ставим старый добрый cmd
+reg add "HKCU\Console\%%Startup" /v "DelegationTerminal" /t REG_SZ /d "{B23D10C0-7EB8-410E-9914-24E608F90FFC}" /f
+reg add "HKCU\Console\%%Startup" /v "DelegationConsole" /t REG_SZ /d "{B23D10C0-7EB8-410E-9914-24E608F90FFC}" /f

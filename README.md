@@ -1,6 +1,9 @@
 ## Hi there 👋
 
-powershell -c "irm https://github.com/grishiny/grishiny/raw/refs/heads/main/myinstall.ps1 | iex"
+powershell -c "irm https://github.com/grishiny/grishiny/raw/refs/heads/main/common_settings.ps1 | iex"
+powershell -c "irm https://github.com/grishiny/grishiny/raw/refs/heads/main/full_install.ps1 | iex"
+powershell -c "irm https://github.com/grishiny/grishiny/raw/refs/heads/main/lite_install.ps1 | iex"
+powershell -c "irm https://github.com/grishiny/grishiny/raw/refs/heads/main/minmal_install.ps1 | iex"
 
 <!--
 **grishiny/grishiny** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
